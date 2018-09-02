@@ -4,7 +4,7 @@
       Linkek: <a href="naplo.txt" download>naplo.txt   </a>
       <a href="Hianyzasok_fel.pdf" target="_blank">Feladat   </a>
       <a href="Hianyzasok_jav.pdf" target="_blank">Javítási  </a>
-      <a href="#" target="_blank">Github</a>
+      <a href="https://github.com/nitslaszlo/JedlikVueJsStarter" target="_blank">Github</a>
     </p>
     <txt-olvaso @load="forras = $event" title="Kérem töltse fel a forrás (naplo.txt) állományt!" />
     <div id="megoldas" v-show="mutat">
