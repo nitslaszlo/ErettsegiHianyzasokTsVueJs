@@ -48,11 +48,11 @@ export default class App extends Vue {
   @Watch("forras", { immediate: true, deep: true })
   onForrasChanged(val: string, oldVal: string) {
     if (val != "") {
-      this.Feladat1();
+      this.Feldolgoz();
     }
   }
 
-  private Feladat1(): void {
+  private Feldolgoz(): void {
     try {
       this.forras.split("\n").forEach(i => {
         const aktSor: string = i.trim();
