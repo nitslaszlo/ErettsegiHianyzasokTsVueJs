@@ -1,0 +1,9 @@
+{
+    "editor.formatOnSave": true,
+    "editor.minimap.enabled": false,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "vue"
+    ]
+}
