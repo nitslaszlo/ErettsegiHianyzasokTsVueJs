@@ -1,9 +1,9 @@
 /** Egy hiányzó tanulót leíró osztály */
 export class Hianyzo {
-  Név: string;
-  Hónap: number;
-  Nap: number;
-  Mulasztások: string; // A napi hiányzást leíró mita O, I, X és N
+  public Név: string;
+  private Hónap: number;
+  private Nap: number;
+  private Mulasztások: string; // A napi hiányzást leíró mita O, I, X és N
 
   /**
    * Az osztály konstruktora
@@ -11,39 +11,43 @@ export class Hianyzo {
    * @param {string} dátumSor - A forrás file dátumot kódoló sora
    * @param {string} sor - A forrás file egy hiányzót kódoló sora
    */
-  constructor(dátumSor: string, sor: string) {
+  public constructor(dátumSor: string, sor: string) {
     let m: string[] = dátumSor.split(" ");
-    if (m.length != 3) throw new Error("Hibás forrás!");
+    if (m.length !== 3) throw new Error("Hibás forrás!");
     this.Hónap = parseInt(m[1]);
+    if (Number.isNaN(this.Hónap)) throw new Error("Hibás forrás!");
     this.Nap = parseInt(m[2]);
+    if (Number.isNaN(this.Nap)) throw new Error("Hibás forrás!");
+
     m = sor.split(" ");
-    if (m.length != 3) throw new Error("Hibás forrás!");
+    if (m.length !== 3) throw new Error("Hibás forrás!");
     this.Név = `${m[0]} ${m[1]}`;
     this.Mulasztások = m[2];
   }
 
   /** 4. feladat megoldása */
   public static HetNapja(honap: number, nap: number): string {
-    // eslint-disable-next-line
-    const napnev: string[] = ["vasarnap", "hetfo", "kedd", "szerda", "csutortok", "pentek", "szombat"]; 
-    // eslint-disable-next-line
+    // prettier-ignore
+    const napnev: string[] = ["vasarnap", "hetfo", "kedd", "szerda", "csutortok", "pentek", "szombat"];
+    // prettier-ignore
     const napszam: number[] = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 335];
+
     const napsorszam: number = (napszam[honap - 1] + nap) % 7;
     return napnev[napsorszam];
   }
 
   /** Igazolt hiányzások száma */
-  get IgazoltDb(): number {
+  public get IgazoltDb(): number {
     return this.Megszámol("X");
   }
 
   /** Igazolatlan hiányzások száma */
-  get IgazolatlanDb(): number {
+  public get IgazolatlanDb(): number {
     return this.Megszámol("I");
   }
 
   /** Hiányzások száma */
-  get HianyzasDb(): number {
+  public get HianyzasDb(): number {
     return this.IgazoltDb + this.IgazolatlanDb;
   }
 
@@ -61,10 +65,9 @@ export class Hianyzo {
   public MegszámolHiányzás(nap: string, óra: number): number {
     let darab: number = 0;
     óra--;
-    if (
-      nap === Hianyzo.HetNapja(this.Hónap, this.Nap) &&
-      (this.Mulasztások[óra] === "X" || this.Mulasztások[óra] === "I")
-    ) {
+    // prettier-ignore
+    if (nap === Hianyzo.HetNapja(this.Hónap, this.Nap) &&
+          (this.Mulasztások[óra] === "X" || this.Mulasztások[óra] === "I")) {
       darab++;
     }
     return darab;

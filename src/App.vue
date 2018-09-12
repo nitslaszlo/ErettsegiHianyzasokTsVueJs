@@ -7,11 +7,11 @@
       <a href="https://github.com/nitslaszlo/ErettsegiHianyzasokTsVueJs" target="_blank">Forrás </a>
       <a href="https://github.com/nitslaszlo/JedlikVueJsStarter" target="_blank">SDK</a>
     </p>
-    <txt-olvaso @load="forras = $event" title="Kérem töltse fel a forrás (naplo.txt) állományt!" />
+    <txt-olvaso v-on:load="forras = $event" title="Kérem töltse fel a forrás (naplo.txt) állományt!" />
     <div id="megoldas" v-show="mutat">
       <p>1. feladat:<br>Az adatok beolvasása</p>
       <p>2. feladat:<br>A naplóban {{hianyzok.length}} bejegyzés van.</p>
-      <p>3. feladat:<br>Az igazolt hiányzások száma {{osszIgazolt}}, az igazolatlanoké {{osszIgazolatlan}} óra.</p>
+      <p>3. feladat:<br>Az igazolt hiányzások száma {{OsszIgazolt}}, az igazolatlanoké {{OsszIgazolatlan}} óra.</p>
       <p>5. feladat:<br>
         A hónap sorszáma =  <input type="number" v-model="honap" min="1" max="12" placeholder="1-12"/><br>
         A nap sorszáma =  <input type="number" v-model="nap" min="1" max="31" placeholder="1-31" /></p>
@@ -39,8 +39,6 @@ export default class App extends Vue {
   private hianyzok: Hianyzo[] = [];
   private aktDatum: string = "";
   private forras: string = "";
-  private osszIgazolt: number = 0;
-  private osszIgazolatlan: number = 0;
   private mutat: boolean = false;
   private honap: number = 2;
   private nap: number = 3;
@@ -51,7 +49,6 @@ export default class App extends Vue {
   onForrasChanged(val: string, oldVal: string) {
     if (val != "") {
       this.Feladat1();
-      this.Feladat3();
     }
   }
 
@@ -68,15 +65,26 @@ export default class App extends Vue {
       this.mutat = false;
       this.hianyzok = [];
       this.forras = "";
-      alert("Hibás forrás!");
+      window.alert("Hibás forrás!");
     }
   }
 
-  private Feladat3(): void {
+  // 3. feladat
+  private get OsszIgazolt(): number {
+    let osszIgazolt: number = 0;
     this.hianyzok.forEach(i => {
-      this.osszIgazolt += i.IgazoltDb;
-      this.osszIgazolatlan += i.IgazolatlanDb;
+      osszIgazolt += i.IgazoltDb;
     });
+    return osszIgazolt;
+  }
+
+  // 3. feladat
+  private get OsszIgazolatlan(): number {
+    let osszIgazolatlan: number = 0;
+    this.hianyzok.forEach(i => {
+      osszIgazolatlan += i.IgazolatlanDb;
+    });
+    return osszIgazolatlan;
   }
 
   // 5. feladat
