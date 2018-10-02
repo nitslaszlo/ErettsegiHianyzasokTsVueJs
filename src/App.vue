@@ -7,7 +7,7 @@
       <a href="https://github.com/nitslaszlo/ErettsegiHianyzasokTsVueJs" target="_blank">Forrás </a>
       <a href="https://github.com/nitslaszlo/JedlikVueJsStarter" target="_blank">SDK</a>
     </p>
-    <txt-olvaso v-on:load="forras = $event" title="Kérem töltse fel a forrás (naplo.txt) állományt!" />
+    <txt-reader v-on:load="txtSorai = $event" title="Kérem töltse fel a forrás (naplo.txt) állományt!" />
     <div id="megoldás" v-show="mutat">
       <p>1. feladat:<br>Az adatok beolvasása</p>
       <p>2. feladat:<br>A naplóban {{hiányzók.length}} bejegyzés van.</p>
@@ -24,27 +24,27 @@
     </div>
     <!-- Nem a feladat része : -->
       <p v-show="mutat"><b>naplo.txt fájl:</b></p>
-      <span v-for="(t, index) in forras.split('\n')" :key="index">{{t.trim()}}<br></span>
+      <span v-for="(t, index) in txtSorai.split('\n')" :key="index">{{t.trim()}}<br></span>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator";
 import Hiányzó from "./hiányzó";
-import TxtOlvaso from "./components/TxtOlvaso.vue";
+import TxtReader from "./components/TxtReader.vue";
 
 // eslint-disable-next-line
-@Component({ components: { TxtOlvaso } })
+@Component({ components: { TxtReader } })
 export default class App extends Vue {
   private hiányzók: Hiányzó[] = [];
-  private forras: string = ""; // Watch végett nem lehet ékezetes azonosító (forrás)!
+  private txtSorai: string = ""; // Watch végett nem lehet ékezetes azonosító! (pl.: forrás)!
   private mutat: boolean = false;
   private hónap: number = 2;
   private nap: number = 3;
   private napNeve: string = "szerda";
   private óraSorszám: number = 3;
 
-  @Watch("forras", { immediate: true, deep: true })
+  @Watch("txtSorai", { immediate: true, deep: true })
   haForrásVáltozik(val: string, oldVal: string) {
     if (val != "") {
       this.Feldolgoz();
@@ -54,7 +54,7 @@ export default class App extends Vue {
   private Feldolgoz(): void {
     try {
       let aktDátum: string = "";
-      this.forras.split("\n").forEach(i => {
+      this.txtSorai.split("\n").forEach(i => {
         const aktSor: string = i.trim();
         if (aktSor[0] === "#") aktDátum = aktSor;
         else if (aktSor.length > 0)
@@ -64,7 +64,7 @@ export default class App extends Vue {
     } catch (error) {
       this.mutat = false;
       this.hiányzók = [];
-      this.forras = "";
+      this.txtSorai = "";
       window.alert("Hibás forrás!");
     }
   }
