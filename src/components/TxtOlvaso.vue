@@ -9,7 +9,9 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
+// A komponensek azonosítójában nem lehet ékezetes karakter !
 export default class TxtOlvaso extends Vue {
+  // prettier-ignore
   @Prop() title!: string;
   loadTextFromFile(ev: any): void {
     const file = ev.target.files[0];
