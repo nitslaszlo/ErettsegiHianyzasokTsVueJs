@@ -16,7 +16,7 @@ export default class Hiányzó {
   public constructor(dátumSor: string, hiányzásSor: string) {
     let m: string[] = dátumSor.split(" ");
     if (m.length !== 3) throw new Error("Hibás forrás!");
-    this.Hónap = parseInt(m[1]);
+    this.Hónap = parseInt(m[1])
     if (Number.isNaN(this.Hónap)) throw new Error("Hibás forrás!");
     this.Nap = parseInt(m[2]);
     if (Number.isNaN(this.Nap)) throw new Error("Hibás forrás!");
