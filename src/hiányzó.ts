@@ -24,7 +24,7 @@ export default class Hiányzó {
     m = hiányzásSor.split(" ");
     if (m.length !== 3) throw new Error("Hibás forrás!");
     this.Név = `${m[0]} ${m[1]}`;
-    this.Mulasztások = m[2];
+    this.Mulasztások = m[2]
   }
 
   /** 4. feladat megoldása - függvény kódolása (javított azonosítókkal) */
