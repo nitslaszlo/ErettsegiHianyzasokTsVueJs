@@ -1,5 +1,6 @@
 {
     "editor.formatOnSave": true,
+    "files.autoSave": "afterDelay",
     "editor.minimap.enabled": false,
     "eslint.validate": [
         "javascript",
