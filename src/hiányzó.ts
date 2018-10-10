@@ -73,7 +73,7 @@ export default class Hiányzó {
     sorszámTanóra--;
     // prettier-ignore
     if (napNeve === Hiányzó.HétNapja(this.Hónap, this.Nap) &&
-          (this.Mulasztások[sorszámTanóra] === "X" || this.Mulasztások[sorszámTanóra] === "I")) {
+      (this.Mulasztások[sorszámTanóra] === "X" || this.Mulasztások[sorszámTanóra] === "I")) {
       darab++;
     }
     return darab;
