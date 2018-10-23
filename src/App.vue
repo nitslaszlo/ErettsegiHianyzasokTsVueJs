@@ -5,19 +5,19 @@
       <a 
         href="naplo.txt"
         download
-      >naplo.txt   </a>
+      >naplo.txt</a>
       <a
         href="Hianyzasok_fel.pdf"
         target="_blank"
-      >Feladat   </a>
+      >Feladat</a>
       <a 
         href="Hianyzasok_jav.pdf"
         target="_blank"
-      >Javítási  </a>
+      >Javítási</a>
       <a 
         href="https://github.com/nitslaszlo/ErettsegiHianyzasokTsVueJs"
         target="_blank"
-      >Forrás </a>
+      >Forrás</a>
       <a 
         href="https://github.com/nitslaszlo/JedlikVueJsStarter"
         target="_blank"
@@ -74,9 +74,9 @@
         <span 
           v-for="t in LegtöbbetHiányzók" 
           :key="t"
-        >
-          {{ t }} </span> </p>
-    </div>
+        >{{ t }} </span>
+      </p>
+    </div> <!-- Megoldás DIV -->
     <!-- Nem a feladat része : -->
     <p v-show="mutat"><b>naplo.txt fájl:</b></p>
     <span
@@ -190,5 +190,6 @@ export default class App extends Vue {
 }
 a {
   text-decoration: none;
+  padding-left: 10px;
 }
 </style>
