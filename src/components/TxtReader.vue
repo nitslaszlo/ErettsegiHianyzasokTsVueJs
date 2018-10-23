@@ -1,7 +1,11 @@
 <template>
   <label class="text-reader">
-    {{title}}
-    <input type="file" v-on:change="loadTextFromFile" accept=".txt">
+    {{ title }}
+    <input 
+      type="file" 
+      accept=".txt" 
+      @change="loadTextFromFile"
+    >
   </label>
 </template>
 

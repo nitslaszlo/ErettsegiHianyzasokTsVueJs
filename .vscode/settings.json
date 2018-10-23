@@ -1,10 +1,9 @@
 {
     "editor.formatOnSave": true,
-    "files.autoSave": "afterDelay",
     "editor.minimap.enabled": false,
     "eslint.validate": [
-        "javascript",
-        "javascriptreact",
+        "typescript",
+        "html",
         "vue"
     ],
     "typescript.tsdk": "node_modules\\typescript\\lib"

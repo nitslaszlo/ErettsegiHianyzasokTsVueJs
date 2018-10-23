@@ -1,9 +1,9 @@
 {
-  "name": "erettsegi-hianyzasok-ts-node-vue",
+  "name": "jedlik-vuejs-starter",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "clean": "rimraf dist"
@@ -19,6 +19,8 @@
     "@vue/cli-service": "^3.0.5",
     "@vue/eslint-config-prettier": "^3.0.5",
     "@vue/eslint-config-typescript": "^3.0.5",
+    "eslint": "^5.7.0",
+    "eslint-plugin-vue": "^5.0.0-beta.3",
     "typescript": "~3.0.3",
     "vue-template-compiler": "^2.5.17"
   }

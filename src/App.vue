@@ -1,30 +1,89 @@
 <template>
   <div id="app">
     <p>
-      Linkek: <a href="naplo.txt" download>naplo.txt   </a>
-      <a href="Hianyzasok_fel.pdf" target="_blank">Feladat   </a>
-      <a href="Hianyzasok_jav.pdf" target="_blank">Javítási  </a>
-      <a href="https://github.com/nitslaszlo/ErettsegiHianyzasokTsVueJs" target="_blank">Forrás </a>
-      <a href="https://github.com/nitslaszlo/JedlikVueJsStarter" target="_blank">SDK</a>
+      Linkek:
+      <a 
+        href="naplo.txt"
+        download
+      >naplo.txt   </a>
+      <a
+        href="Hianyzasok_fel.pdf"
+        target="_blank"
+      >Feladat   </a>
+      <a 
+        href="Hianyzasok_jav.pdf"
+        target="_blank"
+      >Javítási  </a>
+      <a 
+        href="https://github.com/nitslaszlo/ErettsegiHianyzasokTsVueJs"
+        target="_blank"
+      >Forrás </a>
+      <a 
+        href="https://github.com/nitslaszlo/JedlikVueJsStarter"
+        target="_blank"
+      >SDK</a>
     </p>
-    <txt-reader v-on:load="txtSorai = $event" title="Kérem töltse fel a forrás (naplo.txt) állományt!" />
-    <div id="megoldás" v-show="mutat">
+    <txt-reader
+      title="Kérem töltse fel a forrás (naplo.txt) állományt!"
+      @:load="txtSorai = $event"
+    />
+    <div 
+      v-show="mutat"
+      id="megoldás"
+    >
       <p>1. feladat:<br>Az adatok beolvasása</p>
-      <p>2. feladat:<br>A naplóban {{hiányzók.length}} bejegyzés van.</p>
-      <p>3. feladat:<br>Az igazolt hiányzások száma {{ÖsszIgazolt}}, az igazolatlanoké {{ÖsszIgazolatlan}} óra.</p>
+      <p>2. feladat:<br>A naplóban {{ hiányzók.length }} bejegyzés van.</p>
+      <p>3. feladat:<br>Az igazolt hiányzások száma {{ ÖsszIgazolt }}, az igazolatlanoké {{ ÖsszIgazolatlan }} óra.</p>
       <p>5. feladat:<br>
-        A hónap sorszáma =  <input type="number" v-model="hónap" min="1" max="12" placeholder="1-12"/><br>
-        A nap sorszáma =  <input type="number" v-model="nap" min="1" max="31" placeholder="1-31" /></p>
-      <p>Azon a napon {{NapNeve}} volt.</p>
+        A hónap sorszáma =
+        <input 
+          v-model="hónap"
+          type="number"
+          min="1"
+          max="12"
+          placeholder="1-12"
+        ><br>
+        A nap sorszáma =
+        <input
+          v-model="nap"
+          type="number"
+          min="1"
+          max="31"
+          placeholder="1-31"
+        >
+      </p>
+      <p>Azon a napon {{ NapNeve }} volt.</p>
       <p>6. feladat:<br>
-        A nap neve =  <input type="text" v-model="napNeve" placeholder="Ékezetek nélkül!"/><br>
-        Az óra sorszáma =  <input type="number" v-model="óraSorszám" min="1" max="24" placeholder="1-24" /></p>
-      <p>Ekkor összesen {{HiányzásokDb}} óra hiányzás történt.</p>
-      <p>7.feladat:<br>A legtöbbet hiányzó tanulók: <span v-for="t in LegtöbbetHiányzók" :key="t">{{t}} </span> </p>
+        A nap neve =  
+        <input
+          v-model="napNeve"
+          type="text"
+          placeholder="Ékezetek nélkül!"
+        ><br>
+        Az óra sorszáma = 
+        <input
+          v-model="óraSorszám"
+          type="number"
+          min="1"
+          max="24"
+          placeholder="1-24" 
+        >
+      </p>
+      <p>Ekkor összesen {{ HiányzásokDb }} óra hiányzás történt.</p>
+      <p>7.feladat:<br>A legtöbbet hiányzó tanulók:
+        <span 
+          v-for="t in LegtöbbetHiányzók" 
+          :key="t"
+        >
+          {{ t }} </span> </p>
     </div>
     <!-- Nem a feladat része : -->
-      <p v-show="mutat"><b>naplo.txt fájl:</b></p>
-      <span v-for="(t, index) in txtSorai.split('\n')" :key="index">{{t.trim()}}<br></span>
+    <p v-show="mutat"><b>naplo.txt fájl:</b></p>
+    <span
+      v-for="(t, index) in txtSorai.split('\n')"
+      :key="index"
+    >
+      {{ t.trim() }}<br></span>
   </div>
 </template>
 
