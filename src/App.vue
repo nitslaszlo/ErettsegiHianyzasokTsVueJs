@@ -25,7 +25,7 @@
     </p>
     <txt-reader
       title="Kérem töltse fel a forrás (naplo.txt) állományt!"
-      @:load="txtSorai = $event"
+      @load="txtSorai = $event"
     />
     <div 
       v-show="mutat"
