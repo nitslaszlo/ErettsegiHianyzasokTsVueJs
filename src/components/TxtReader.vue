@@ -1,11 +1,7 @@
 <template>
   <label class="text-reader">
     {{ title }}
-    <input 
-      type="file" 
-      accept=".txt" 
-      @change="loadTextFromFile"
-    >
+    <input type="file" accept=".txt" @change="loadTextFromFile">
   </label>
 </template>
 
