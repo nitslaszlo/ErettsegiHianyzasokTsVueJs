@@ -7,8 +7,7 @@ export default class Hiányzó {
   private Nap: number;
   private Mulasztások: string; // A napi hiányzást leíró mita O, I, X és N
 
-  /**
-   * Az osztály konstruktora
+  /** Az osztály konstruktora
    * @constructor
    * @param {string} dátumSor A forrás file dátumot kódoló sora
    * @param {string} hiányzásSor A forrás file egy hiányzót kódoló sora
