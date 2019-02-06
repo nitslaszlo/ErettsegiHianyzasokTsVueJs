@@ -1,7 +1,7 @@
 <template>
   <label class="text-reader">
     {{ title }}
-    <input type="file" accept=".txt" @change="loadTextFromFile">
+    <input type="file" accept=".txt" @change="loadTextFromFile" />
   </label>
 </template>
 
@@ -13,7 +13,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 export default class TxtReader extends Vue {
   // prettier-ignore
   @Prop() title!: string;
-  loadTextFromFile(ev: any): void {
+  loadTextFromFile (ev: any): void {
     const file = ev.target.files[0];
     const reader: FileReader = new FileReader();
 

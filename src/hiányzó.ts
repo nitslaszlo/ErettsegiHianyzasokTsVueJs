@@ -12,7 +12,7 @@ export default class Hiányzó {
    * @param {string} dátumSor A forrás file dátumot kódoló sora
    * @param {string} hiányzásSor A forrás file egy hiányzót kódoló sora
    */
-  public constructor(dátumSor: string, hiányzásSor: string) {
+  public constructor (dátumSor: string, hiányzásSor: string) {
     let m: string[] = dátumSor.split(" ");
     if (m.length !== 3) throw new Error("Hibás forrás!");
     this.Hónap = parseInt(m[1]);
@@ -27,7 +27,7 @@ export default class Hiányzó {
   }
 
   /** 4. feladat megoldása - függvény kódolása (javított azonosítókkal) */
-  public static HétNapja(hónap: number, nap: number): string {
+  public static HétNapja (hónap: number, nap: number): string {
     // prettier-ignore
     const napNév: string[] = ["vasarnap", "hetfo", "kedd", "szerda", "csutortok", "pentek", "szombat"];
     // prettier-ignore
@@ -38,24 +38,24 @@ export default class Hiányzó {
   }
 
   /** Igazolt hiányzások száma */
-  public get IgazoltDb(): number {
+  public get IgazoltDb (): number {
     return this.Megszámol("X");
   }
 
   /** Igazolatlan hiányzások száma */
-  public get IgazolatlanDb(): number {
+  public get IgazolatlanDb (): number {
     return this.Megszámol("I");
   }
 
   /** Hiányzások száma */
-  public get HiányzásDb(): number {
+  public get HiányzásDb (): number {
     return this.IgazoltDb + this.IgazolatlanDb;
   }
 
   /** Megadott karakter darabszáma a mulasztások karakterláncban
    * @param {string} ch A megszámlálandó karakter (hiányzás típus)
    */
-  private Megszámol(ch: string): number {
+  private Megszámol (ch: string): number {
     let darab: number = 0;
     for (let i: number = 0; i < this.Mulasztások.length; i++) {
       if (this.Mulasztások[i] === ch) darab++;
@@ -67,7 +67,7 @@ export default class Hiányzó {
    * @param {string} napNeve A nap neve (pl.: csutortok)
    * @param {number} sorszámTanóra A tanóra sorszáma (1..N)
    */
-  public MegszámolHiányzás(napNeve: string, sorszámTanóra: number): number {
+  public MegszámolHiányzás (napNeve: string, sorszámTanóra: number): number {
     let darab: number = 0;
     sorszámTanóra--;
     // prettier-ignore
