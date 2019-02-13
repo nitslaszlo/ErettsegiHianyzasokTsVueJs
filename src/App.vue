@@ -8,57 +8,46 @@
       <a href="https://github.com/nitslaszlo/ErettsegiHianyzasokTsVueJs" target="_blank">Forrás</a>
       <a href="https://github.com/nitslaszlo/JedlikVueJsStarter" target="_blank">SDK</a>
     </p>
-    <txt-reader
-      title="Kérem töltse fel a forrás (naplo.txt) állományt!"
-      @load="txtSorai = $event"
-    />
+    <txt-reader title="Kérem töltse fel a forrás (naplo.txt) állományt!" @load="txtSorai = $event"/>
     <div v-show="mutat" id="megoldás">
-      <p>1. feladat:<br/>Az adatok beolvasása</p>
-      <p>2. feladat:<br>A naplóban {{ hiányzók.length }} bejegyzés van.
+      <p>1. feladat:
+        <br>Az adatok beolvasása
+      </p>
+      <p>2. feladat:
+        <br>
+        A naplóban {{ hiányzók.length }} bejegyzés van.
       </p>
       <p>
         3. feladat:
-        <br/>
+        <br>
         Az igazolt hiányzások száma {{ ÖsszIgazolt }}, az igazolatlanoké
         {{ ÖsszIgazolatlan }} óra.
       </p>
       <p>
         5. feladat:
-        <br />A hónap sorszáma =
-        <input
-          v-model="hónap"
-          type="number"
-          min="1"
-          max="12"
-          placeholder="1-12"
-        />
-        <br />A nap sorszáma =
-        <input
-          v-model="nap"
-          type="number"
-          min="1"
-          max="31"
-          placeholder="1-31"
-        />
+        <br>A hónap sorszáma =
+        <input v-model="hónap" type="number" min="1" max="12" placeholder="1-12">
+        <br>A nap sorszáma =
+        <input v-model="nap" type="number" min="1" max="31" placeholder="1-31">
       </p>
       <p>Azon a napon {{ NapNeve }} volt.</p>
       <p>
         6. feladat:
-        <br />A nap neve =
-        <input v-model="napNeve" type="text" placeholder="Ékezetek nélkül!" />
-        <br />Az óra sorszáma =
+        <br>A nap neve =
+        <input v-model="napNeve" type="text" placeholder="Ékezetek nélkül!">
+        <br>Az óra sorszáma =
         <input
           v-model="óraSorszám"
           type="number"
           min="1"
           max="24"
           placeholder="1-24"
-        />
+        >
       </p>
       <p>Ekkor összesen {{ HiányzásokDb }} óra hiányzás történt.</p>
       <p>
         7.feladat:
-        <br />A legtöbbet hiányzó tanulók:
+        <br>A legtöbbet hiányzó tanulók:
         <span v-for="t in LegtöbbetHiányzók" :key="t">{{ t }}</span>
       </p>
     </div>
@@ -69,7 +58,7 @@
     </p>
     <span v-for="(t, index) in txtSorai.split('\n')" :key="index">
       {{ t.trim() }}
-      <br />
+      <br>
     </span>
   </div>
 </template>
@@ -91,13 +80,11 @@ export default class App extends Vue {
   private óraSorszám: number = 3;
 
   @Watch("txtSorai", { immediate: true, deep: true })
-  haForrásVáltozik (val: string, oldVal: string) {
-    if (val !== "") {
-      this.Feldolgoz();
-    }
+  private haForrásVáltozik(val: string, oldVal: string) {
+    if (val !== "") this.Feldolgoz();
   }
 
-  private Feldolgoz (): void {
+  private Feldolgoz(): void {
     try {
       let aktDátum: string = "";
       this.txtSorai.split("\n").forEach(i => {
@@ -115,7 +102,7 @@ export default class App extends Vue {
   }
 
   // 3. feladat
-  private get ÖsszIgazolt (): number {
+  private get ÖsszIgazolt(): number {
     let összIgazolt: number = 0;
     this.hiányzók.forEach(i => {
       összIgazolt += i.IgazoltDb;
@@ -124,7 +111,7 @@ export default class App extends Vue {
   }
 
   // 3. feladat
-  private get ÖsszIgazolatlan (): number {
+  private get ÖsszIgazolatlan(): number {
     let összIgazolatlan: number = 0;
     this.hiányzók.forEach(i => {
       összIgazolatlan += i.IgazolatlanDb;
@@ -133,12 +120,12 @@ export default class App extends Vue {
   }
 
   // 5. feladat
-  private get NapNeve (): string {
+  private get NapNeve(): string {
     return Hiányzó.HétNapja(this.hónap, this.nap);
   }
 
   // 6. feladat
-  private get HiányzásokDb (): number {
+  private get HiányzásokDb(): number {
     let db: number = 0;
     this.hiányzók.forEach(i => {
       db += i.MegszámolHiányzás(this.napNeve, this.óraSorszám);
@@ -147,16 +134,15 @@ export default class App extends Vue {
   }
 
   // 7. feladat
-  private get LegtöbbetHiányzók (): string[] {
+  private get LegtöbbetHiányzók(): string[] {
     const stat: Map<string, number> = new Map<string, number>();
     this.hiányzók.forEach(i => {
-      if (stat.has(i.Név)) {
-        stat.set(i.Név, stat.get(i.Név)! + i.HiányzásDb);
-      } else stat.set(i.Név, i.HiányzásDb);
+      if (stat.has(i.Név)) stat.set(i.Név, stat.get(i.Név)! + i.HiányzásDb);
+      else stat.set(i.Név, i.HiányzásDb);
     });
 
     const maxHiányzás: number = Math.max(...stat.values());
-    let tanulók: string[] = [];
+    const tanulók: string[] = [];
     stat.forEach((value: number, key: string) => {
       if (value === maxHiányzás) tanulók.push(key);
     });

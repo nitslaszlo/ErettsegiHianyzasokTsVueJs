@@ -12,8 +12,8 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 // A komponensek azonosítójában nem lehet ékezetes karakter pl.: TxtOlvasó !
 export default class TxtReader extends Vue {
   // prettier-ignore
-  @Prop() title!: string;
-  loadTextFromFile (ev: any): void {
+  @Prop() private title!: string;
+  public loadTextFromFile(ev: any): void {
     const file = ev.target.files[0];
     const reader: FileReader = new FileReader();
 
