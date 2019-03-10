@@ -3,20 +3,18 @@
 /** Egy hiányzó tanulót leíró osztály */
 export default class Hiányzó {
   /** 4. feladat megoldása - függvény kódolása (javított azonosítókkal) */
-  public static HétNapja(hónap: number, nap: number): string {
-    // prettier-ignore
+  public static hétNapja(hónap: number, nap: number): string {
     const napNév: string[] = ["vasarnap", "hetfo", "kedd", "szerda", "csutortok", "pentek", "szombat"];
-    // prettier-ignore
     const napSzám: number[] = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 335];
 
     const napSorszám: number = (napSzám[hónap - 1] + nap) % 7;
     return napNév[napSorszám];
   }
 
-  public Név: string;
-  private Hónap: number;
-  private Nap: number;
-  private Mulasztások: string; // A napi hiányzást leíró mita O, I, X és N
+  public név: string;
+  private hónap: number;
+  private nap: number;
+  private mulasztások: string; // A napi hiányzást leíró mita O, I, X és N
 
   /** Az osztály konstruktora
    * @constructor
@@ -26,53 +24,53 @@ export default class Hiányzó {
   public constructor(dátumSor: string, hiányzásSor: string) {
     let m: string[] = dátumSor.split(" ");
     if (m.length !== 3) throw new Error("Hibás forrás!");
-    this.Hónap = parseInt(m[1], 10);
-    if (Number.isNaN(this.Hónap)) throw new Error("Hibás forrás!");
-    this.Nap = parseInt(m[2], 10);
-    if (Number.isNaN(this.Nap)) throw new Error("Hibás forrás!");
+    this.hónap = parseInt(m[1], 10);
+    if (Number.isNaN(this.hónap)) throw new Error("Hibás forrás!");
+    this.nap = parseInt(m[2], 10);
+    if (Number.isNaN(this.nap)) throw new Error("Hibás forrás!");
 
     m = hiányzásSor.split(" ");
     if (m.length !== 3) throw new Error("Hibás forrás!");
-    this.Név = `${m[0]} ${m[1]}`;
-    this.Mulasztások = m[2];
+    this.név = `${m[0]} ${m[1]}`;
+    this.mulasztások = m[2];
   }
 
   /** Meghatároza a megadott nap (pl.: hetfo) megadott tanórájában (pl.: 1) a hiányzások összegét
    * @param {string} napNeve A nap neve (pl.: csutortok)
    * @param {number} sorszámTanóra A tanóra sorszáma (1..N)
    */
-  public MegszámolHiányzás(napNeve: string, sorszámTanóra: number): number {
+  public megszámolHiányzás(napNeve: string, sorszámTanóra: number): number {
     let darab: number = 0;
     sorszámTanóra--;
     // prettier-ignore
-    if (napNeve === Hiányzó.HétNapja(this.Hónap, this.Nap) &&
-      (this.Mulasztások[sorszámTanóra] === "X" || this.Mulasztások[sorszámTanóra] === "I")) {
+    if (napNeve === Hiányzó.hétNapja(this.hónap, this.nap) &&
+      (this.mulasztások[sorszámTanóra] === "X" || this.mulasztások[sorszámTanóra] === "I")) {
       darab++;
     }
     return darab;
   }
 
   /** Igazolt hiányzások száma */
-  public get IgazoltDb(): number {
-    return this.Megszámol("X");
+  public get igazoltDb(): number {
+    return this.megszámol("X");
   }
 
   /** Igazolatlan hiányzások száma */
-  public get IgazolatlanDb(): number {
-    return this.Megszámol("I");
+  public get igazolatlanDb(): number {
+    return this.megszámol("I");
   }
 
   /** Hiányzások száma */
   public get HiányzásDb(): number {
-    return this.IgazoltDb + this.IgazolatlanDb;
+    return this.igazoltDb + this.igazolatlanDb;
   }
 
   /** Megadott karakter darabszáma a mulasztások karakterláncban
    * @param {string} ch A megszámlálandó karakter (hiányzás típus)
    */
-  private Megszámol(ch: string): number {
+  private megszámol(ch: string): number {
     let darab: number = 0;
-    for (const i of this.Mulasztások) {
+    for (const i of this.mulasztások) {
       if (i === ch) darab++;
     }
     return darab;

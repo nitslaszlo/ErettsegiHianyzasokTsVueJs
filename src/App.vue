@@ -20,8 +20,8 @@
       <p>
         3. feladat:
         <br>
-        Az igazolt hiányzások száma {{ ÖsszIgazolt }}, az igazolatlanoké
-        {{ ÖsszIgazolatlan }} óra.
+        Az igazolt hiányzások száma {{ összIgazolt }}, az igazolatlanoké
+        {{ összIgazolatlan }} óra.
       </p>
       <p>
         5. feladat:
@@ -30,7 +30,7 @@
         <br>A nap sorszáma =
         <input v-model="nap" type="number" min="1" max="31" placeholder="1-31">
       </p>
-      <p>Azon a napon {{ NapNeve }} volt.</p>
+      <p>Azon a napon {{ napNeveVolt }} volt.</p>
       <p>
         6. feladat:
         <br>A nap neve =
@@ -44,11 +44,11 @@
           placeholder="1-24"
         >
       </p>
-      <p>Ekkor összesen {{ HiányzásokDb }} óra hiányzás történt.</p>
+      <p>Ekkor összesen {{ hiányzásokDb }} óra hiányzás történt.</p>
       <p>
         7.feladat:
         <br>A legtöbbet hiányzó tanulók:
-        <span v-for="t in LegtöbbetHiányzók" :key="t">{{ t }}</span>
+        <span v-for="t in legtöbbetHiányzók" :key="t">{{ t }}</span>
       </p>
     </div>
     <!-- Megoldás DIV -->
@@ -81,10 +81,10 @@ export default class App extends Vue {
 
   @Watch("txtSorai", { immediate: true, deep: true })
   private haForrásVáltozik(val: string, oldVal: string) {
-    if (val !== "") this.Feldolgoz();
+    if (val !== "") this.feldolgoz();
   }
 
-  private Feldolgoz(): void {
+  private feldolgoz(): void {
     try {
       let aktDátum: string = "";
       this.txtSorai.split("\n").forEach(i => {
@@ -102,43 +102,43 @@ export default class App extends Vue {
   }
 
   // 3. feladat
-  private get ÖsszIgazolt(): number {
+  private get összIgazolt(): number {
     let összIgazolt: number = 0;
     this.hiányzók.forEach(i => {
-      összIgazolt += i.IgazoltDb;
+      összIgazolt += i.igazoltDb;
     });
     return összIgazolt;
   }
 
   // 3. feladat
-  private get ÖsszIgazolatlan(): number {
+  private get összIgazolatlan(): number {
     let összIgazolatlan: number = 0;
     this.hiányzók.forEach(i => {
-      összIgazolatlan += i.IgazolatlanDb;
+      összIgazolatlan += i.igazolatlanDb;
     });
     return összIgazolatlan;
   }
 
   // 5. feladat
-  private get NapNeve(): string {
-    return Hiányzó.HétNapja(this.hónap, this.nap);
+  private get napNeveVolt(): string {
+    return Hiányzó.hétNapja(this.hónap, this.nap);
   }
 
   // 6. feladat
-  private get HiányzásokDb(): number {
+  private get hiányzásokDb(): number {
     let db: number = 0;
     this.hiányzók.forEach(i => {
-      db += i.MegszámolHiányzás(this.napNeve, this.óraSorszám);
+      db += i.megszámolHiányzás(this.napNeve, this.óraSorszám);
     });
     return db;
   }
 
   // 7. feladat
-  private get LegtöbbetHiányzók(): string[] {
+  private get legtöbbetHiányzók(): string[] {
     const stat: Map<string, number> = new Map<string, number>();
     this.hiányzók.forEach(i => {
-      if (stat.has(i.Név)) stat.set(i.Név, stat.get(i.Név)! + i.HiányzásDb);
-      else stat.set(i.Név, i.HiányzásDb);
+      if (stat.has(i.név)) stat.set(i.név, stat.get(i.név)! + i.HiányzásDb);
+      else stat.set(i.név, i.HiányzásDb);
     });
 
     const maxHiányzás: number = Math.max(...stat.values());
