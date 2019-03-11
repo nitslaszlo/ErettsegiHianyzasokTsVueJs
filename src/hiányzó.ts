@@ -42,7 +42,6 @@ export default class Hiányzó {
   public megszámolHiányzás(napNeve: string, sorszámTanóra: number): number {
     let darab: number = 0;
     sorszámTanóra--;
-    // prettier-ignore
     if (napNeve === Hiányzó.hétNapja(this.hónap, this.nap) &&
       (this.mulasztások[sorszámTanóra] === "X" || this.mulasztások[sorszámTanóra] === "I")) {
       darab++;
@@ -61,7 +60,7 @@ export default class Hiányzó {
   }
 
   /** Hiányzások száma */
-  public get HiányzásDb(): number {
+  public get hiányzásDb(): number {
     return this.igazoltDb + this.igazolatlanDb;
   }
 

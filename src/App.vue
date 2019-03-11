@@ -34,7 +34,7 @@
       <p>
         6. feladat:
         <br>A nap neve =
-        <input v-model="napNeve" type="text" placeholder="Ékezetek nélkül!">
+        <input v-model="napNeveInput" type="text" placeholder="Ékezetek nélkül!">
         <br>Az óra sorszáma =
         <input
           v-model="óraSorszám"
@@ -76,7 +76,7 @@ export default class App extends Vue {
   private mutat: boolean = false;
   private hónap: number = 2;
   private nap: number = 3;
-  private napNeve: string = "szerda";
+  private napNeveInput: string = "szerda";
   private óraSorszám: number = 3;
 
   @Watch("txtSorai", { immediate: true, deep: true })
@@ -128,7 +128,7 @@ export default class App extends Vue {
   private get hiányzásokDb(): number {
     let db: number = 0;
     this.hiányzók.forEach(i => {
-      db += i.megszámolHiányzás(this.napNeve, this.óraSorszám);
+      db += i.megszámolHiányzás(this.napNeveInput, this.óraSorszám);
     });
     return db;
   }
@@ -137,8 +137,8 @@ export default class App extends Vue {
   private get legtöbbetHiányzók(): string[] {
     const stat: Map<string, number> = new Map<string, number>();
     this.hiányzók.forEach(i => {
-      if (stat.has(i.név)) stat.set(i.név, stat.get(i.név)! + i.HiányzásDb);
-      else stat.set(i.név, i.HiányzásDb);
+      if (stat.has(i.név)) stat.set(i.név, stat.get(i.név)! + i.hiányzásDb);
+      else stat.set(i.név, i.hiányzásDb);
     });
 
     const maxHiányzás: number = Math.max(...stat.values());
