@@ -35,18 +35,17 @@ export default class Hiányzó {
     this.mulasztások = m[2];
   }
 
-  /** Meghatároza a megadott nap (pl.: hetfo) megadott tanórájában (pl.: 1) a hiányzások összegét
+  /** Meghatározza a megadott nap (pl.: hetfo) megadott tanórájában (pl.: 1) a hiányzások összegét
    * @param {string} napNeve A nap neve (pl.: csutortok)
    * @param {number} sorszámTanóra A tanóra sorszáma (1..N)
    */
   public megszámolHiányzás(napNeve: string, sorszámTanóra: number): number {
-    let darab: number = 0;
     sorszámTanóra--;
     if (napNeve === Hiányzó.hétNapja(this.hónap, this.nap) &&
       (this.mulasztások[sorszámTanóra] === "X" || this.mulasztások[sorszámTanóra] === "I")) {
-      darab++;
+      return 1; // Hiányzot a megadott nap (pl. "kedd") megadott tanórájában (pl. 2)
     }
-    return darab;
+    return 0; // Nem a megadott nap (pl. "kedd") megadott tanórájában (pl. 2) hányzott
   }
 
   /** Igazolt hiányzások száma */

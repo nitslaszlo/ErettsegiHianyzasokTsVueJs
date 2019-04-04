@@ -48,7 +48,7 @@
       <p>
         7.feladat:
         <br>A legtöbbet hiányzó tanulók:
-        <span v-for="t in legtöbbetHiányzók" :key="t">{{ t }}</span>
+        <span v-for="t in legtöbbetHiányzók" :key="t">{{ t + " " }}</span>
       </p>
     </div>
     <!-- Megoldás DIV -->
